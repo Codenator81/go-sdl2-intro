@@ -11,6 +11,7 @@ _test
 bin
 lib
 .idea
+src/github.com
 
 # Architecture specific extensions/prefixes
 *.[568vq]
