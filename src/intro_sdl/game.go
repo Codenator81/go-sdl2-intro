@@ -55,6 +55,7 @@ func InitGraph(title string, xpos int, ypos int, height int, width int, fullscre
 	}
 	//count width and height of image
 	//Query return int but we need int32
+
 	var _, _, rWidth, rHeight, err = pTexture.Query()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Failed to query texture: %s\n", err)
@@ -63,13 +64,15 @@ func InitGraph(title string, xpos int, ypos int, height int, width int, fullscre
 	//convert(cast) int to int32
 	sourceRectangle.W, sourceRectangle.H = int32(rWidth), int32(rHeight)
 
-	destinationRectangle.X, sourceRectangle.X = 0, 0
-	destinationRectangle.Y, sourceRectangle.Y = 0, 0
+	//move picture out of corner
+	destinationRectangle.X, sourceRectangle.X = 100, 0
+	destinationRectangle.Y, sourceRectangle.Y = 100, 0
 	destinationRectangle.W = sourceRectangle.W
 	destinationRectangle.H = sourceRectangle.H
-    //test to make picture smaller
-    sourceRectangle.W = 50
-    sourceRectangle.H = 50
+	//test to make picture smaller
+	sourceRectangle.W = 50
+	sourceRectangle.H = 50
+
 }
 
 func Render() {

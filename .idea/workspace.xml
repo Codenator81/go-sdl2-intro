@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="66cd1a34-ff48-400c-88a6-2eef4b4990fe" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+    <list default="true" id="66cd1a34-ff48-400c-88a6-2eef4b4990fe" name="Default" comment="test to make picture smaller">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/intro_sdl/game.go" afterPath="$PROJECT_DIR$/src/intro_sdl/game.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -70,8 +69,8 @@
       <file leaf-file-name="game.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/intro_sdl/game.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.68813556">
-              <caret line="69" column="6" selection-start-line="69" selection-start-column="6" selection-end-line="69" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.33728814">
+              <caret line="66" column="32" selection-start-line="66" selection-start-column="6" selection-end-line="66" selection-end-column="32" />
               <folding>
                 <element signature="e#14#88#0" expanded="true" />
               </folding>
@@ -390,7 +389,13 @@
       <option name="project" value="LOCAL" />
       <updated>1427624888402</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="test to make picture smaller">
+      <created>1427625226239</created>
+      <option name="number" value="00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1427625226239</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -441,7 +446,8 @@
     <MESSAGE value="Split code to game.go" />
     <MESSAGE value="render static image" />
     <MESSAGE value="Add assets path finder func and fix bug in last commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add assets path finder func and fix bug in last commit" />
+    <MESSAGE value="test to make picture smaller" />
+    <option name="LAST_COMMIT_MESSAGE" value="test to make picture smaller" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -562,8 +568,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/intro_sdl/game.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.68813556">
-          <caret line="69" column="6" selection-start-line="69" selection-start-column="6" selection-end-line="69" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.33728814">
+          <caret line="66" column="32" selection-start-line="66" selection-start-column="6" selection-end-line="66" selection-end-column="32" />
           <folding>
             <element signature="e#14#88#0" expanded="true" />
           </folding>
