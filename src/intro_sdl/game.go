@@ -8,8 +8,8 @@ import (
 )
 
 var pTexture *sdl.Texture
-var sourceRectangle sdl.Rect
-var destinationRectangle sdl.Rect
+var srcRect sdl.Rect
+var dstRect sdl.Rect
 
 func HandleEvents() {
 	for event = sdl.PollEvent(); event != nil; event = sdl.PollEvent() {
@@ -42,7 +42,8 @@ func InitGraph(title string, xpos int, ypos int, height int, width int, fullscre
 		os.Exit(2)
 	}
 	var pTempSurface *sdl.Surface
-	pTempSurface, err = sdl.LoadBMP(AssetsPath() + "/rider.bmp")
+    //load animate sprite from book
+	pTempSurface, err = sdl.LoadBMP(AssetsPath() + "/animate.bmp")
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Failed to load BMP: %s\n", err)
 		os.Exit(3)
@@ -53,32 +54,18 @@ func InitGraph(title string, xpos int, ypos int, height int, width int, fullscre
 		fmt.Fprintf(os.Stderr, "Failed to create texture: %s\n", err)
 		os.Exit(4)
 	}
-	//count width and height of image
-	//Query return int but we need int32
 
-	var _, _, rWidth, rHeight, err = pTexture.Query()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Failed to query texture: %s\n", err)
-		os.Exit(5)
-	}
-	//convert(cast) int to int32
-	sourceRectangle.W, sourceRectangle.H = int32(rWidth), int32(rHeight)
-
-	//move picture out of corner and source image move in another place
-	destinationRectangle.X, sourceRectangle.X = 100, 50
-	destinationRectangle.Y, sourceRectangle.Y = 100, 50
-	destinationRectangle.W = sourceRectangle.W
-	destinationRectangle.H = sourceRectangle.H
-	//test to make picture smaller
-	sourceRectangle.W = 50
-	sourceRectangle.H = 50
-
+	dstRect.X, srcRect.X = 0, 0
+    dstRect.Y, srcRect.Y = 0, 0
+	//get first picture in sprite
+    dstRect.W, srcRect.W = 128, 128
+    dstRect.H, srcRect.H = 82, 82
 }
 
 func Render() {
 	renderer.SetDrawColor(0, 0, 0, 255)
 	renderer.Clear()
-	renderer.Copy(pTexture, &sourceRectangle, &destinationRectangle)
+	renderer.Copy(pTexture, &srcRect, &dstRect)
 	renderer.Present()
 }
 
