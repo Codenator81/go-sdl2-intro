@@ -42,10 +42,7 @@ func InitGraph(title string, xpos int, ypos int, height int, width int, fullscre
 		os.Exit(2)
 	}
 	var pTempSurface *sdl.Surface
-	filedirectory := filepath.Dir("assets/rider.bmp")
-	imagePath, _ := filepath.Abs(filedirectory)
-	fmt.Println(imagePath)
-	pTempSurface, err = sdl.LoadBMP("/home/alex/develop/go/game/assets/rider.bmp")
+	pTempSurface, err = sdl.LoadBMP(AssetsPath() + "/rider.bmp")
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Failed to load BMP: %s\n", err)
 		os.Exit(3)
@@ -87,4 +84,15 @@ func Clean() {
 	renderer.Destroy()
 	pTexture.Destroy()
 	sdl.Quit()
+}
+
+// get path to assets dir in current GOPATH
+func AssetsPath() string {
+	assetsdirectory := filepath.Dir("assets/")
+	imagePath, err := filepath.Abs(assetsdirectory)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Failed to find assets dir: %s\n", err)
+		os.Exit(6)
+	}
+	return imagePath
 }
