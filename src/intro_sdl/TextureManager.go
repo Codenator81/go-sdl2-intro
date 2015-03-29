@@ -7,26 +7,31 @@ import (
 	"os"
 )
 
-var textureMap = map[string]*sdl.Texture{}
+type TextureManager struct {
+	textureMap map[string]*sdl.Texture
+	zeroPoint  *sdl.Point
+	err        error
+}
 
-func Load(fileName string, id string) {
+func (tm *TextureManager) Load(fileName string, id string, g *Game) {
 	var pTempSurface *sdl.Surface
 	var pTexture *sdl.Texture
-	pTempSurface, err = img.Load(fileName)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Failed to load BMP: %s\n", err)
+	pTempSurface, tm.err = img.Load(fileName)
+	if tm.err != nil {
+		fmt.Fprintf(os.Stderr, "Failed to load BMP: %s\n", tm.err)
 		os.Exit(3)
 	}
-	pTexture, err = renderer.CreateTextureFromSurface(pTempSurface)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Failed to create texture: %s\n", err)
+	pTexture, tm.err = g.renderer.CreateTextureFromSurface(pTempSurface)
+	if tm.err != nil {
+		fmt.Fprintf(os.Stderr, "Failed to create texture: %s\n", tm.err)
 		os.Exit(4)
 	}
 	defer pTempSurface.Free()
-	textureMap[id] = pTexture
+
+	tm.textureMap[id] = pTexture
 }
 
-func Draw(id string, x int32, y int32, width int32, height int32, flip sdl.RendererFlip) {
+func (tm *TextureManager) Draw(id string, x int32, y int32, width int32, height int32, g *Game, flip sdl.RendererFlip) {
 	var srcRect sdl.Rect
 	var destRect sdl.Rect
 
@@ -36,10 +41,10 @@ func Draw(id string, x int32, y int32, width int32, height int32, flip sdl.Rende
 	srcRect.H, destRect.H = height, height
 	destRect.X = x
 	destRect.Y = y
-	renderer.CopyEx(textureMap[id], &srcRect, &destRect, 0, zeroPoint, flip)
+	g.renderer.CopyEx(tm.textureMap[id], &srcRect, &destRect, 0, tm.zeroPoint, flip)
 }
 
-func DrawFrame(id string, x int32, y int32, width int32, height int32, currentRow int32, currentFrame int32, flip sdl.RendererFlip) {
+func (tm *TextureManager) DrawFrame(id string, x int32, y int32, width int32, height int32, currentRow int32, currentFrame int32, g *Game, flip sdl.RendererFlip) {
 	var srcRect sdl.Rect
 	var destRect sdl.Rect
 	srcRect.X = width * currentFrame
@@ -49,15 +54,15 @@ func DrawFrame(id string, x int32, y int32, width int32, height int32, currentRo
 	destRect.X = x
 	destRect.Y = y
 
-	renderer.CopyEx(textureMap[id], &srcRect, &destRect, 0, zeroPoint, flip)
+	g.renderer.CopyEx(tm.textureMap[id], &srcRect, &destRect, 0, tm.zeroPoint, flip)
 }
 
 //func for default flip_none
-func DrawFN(id string, x int32, y int32, width int32, height int32) {
-	Draw(id, x, y, width, height, sdl.FLIP_NONE)
+func (tm *TextureManager) DrawFN(id string, x int32, y int32, width int32, height int32, g *Game) {
+	tm.Draw(id, x, y, width, height, g, sdl.FLIP_NONE)
 }
 
 //func for default flip_none
-func DrawFrameFN(id string, x int32, y int32, width int32, height int32, currentRow, currentFrame int32) {
-	DrawFrame(id, x, y, width, height, currentRow, currentFrame, sdl.FLIP_NONE)
+func (tm *TextureManager) DrawFrameFN(id string, x int32, y int32, width int32, height int32, currentRow, currentFrame int32, g *Game) {
+	tm.DrawFrame(id, x, y, width, height, currentRow, currentFrame, g, sdl.FLIP_NONE)
 }
