@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="66cd1a34-ff48-400c-88a6-2eef4b4990fe" name="Default" comment="test to make picture smaller">
+    <list default="true" id="66cd1a34-ff48-400c-88a6-2eef4b4990fe" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/intro_sdl/game.go" afterPath="$PROJECT_DIR$/src/intro_sdl/game.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -59,8 +60,8 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.6666665">
-              <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
+            <state vertical-scroll-proportion="-8.515152">
+              <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -69,8 +70,8 @@
       <file leaf-file-name="game.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/intro_sdl/game.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33728814">
-              <caret line="66" column="32" selection-start-line="66" selection-start-column="6" selection-end-line="66" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.49322033">
+              <caret line="66" column="37" selection-start-line="66" selection-start-column="37" selection-end-line="66" selection-end-column="71" />
               <folding>
                 <element signature="e#14#88#0" expanded="true" />
               </folding>
@@ -395,7 +396,13 @@
       <option name="project" value="LOCAL" />
       <updated>1427625226239</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="move picture out of corner">
+      <created>1427625507651</created>
+      <option name="number" value="00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1427625507651</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -447,7 +454,8 @@
     <MESSAGE value="render static image" />
     <MESSAGE value="Add assets path finder func and fix bug in last commit" />
     <MESSAGE value="test to make picture smaller" />
-    <option name="LAST_COMMIT_MESSAGE" value="test to make picture smaller" />
+    <MESSAGE value="move picture out of corner" />
+    <option name="LAST_COMMIT_MESSAGE" value="move picture out of corner" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -550,8 +558,8 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.6666665">
-          <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
+        <state vertical-scroll-proportion="-8.515152">
+          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
           <folding />
         </state>
       </provider>
@@ -568,8 +576,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/intro_sdl/game.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33728814">
-          <caret line="66" column="32" selection-start-line="66" selection-start-column="6" selection-end-line="66" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.49322033">
+          <caret line="66" column="37" selection-start-line="66" selection-start-column="37" selection-end-line="66" selection-end-column="71" />
           <folding>
             <element signature="e#14#88#0" expanded="true" />
           </folding>

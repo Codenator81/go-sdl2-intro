@@ -7,7 +7,6 @@ Just play with sdl2 on Golang
 
 intro_sdl: 
 <p>create assets in intro_sdl</p>
-<p>create assets dir in your gopath</p>
 
 chapter1 - chapter2
 

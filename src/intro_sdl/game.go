@@ -64,9 +64,9 @@ func InitGraph(title string, xpos int, ypos int, height int, width int, fullscre
 	//convert(cast) int to int32
 	sourceRectangle.W, sourceRectangle.H = int32(rWidth), int32(rHeight)
 
-	//move picture out of corner
-	destinationRectangle.X, sourceRectangle.X = 100, 0
-	destinationRectangle.Y, sourceRectangle.Y = 100, 0
+	//move picture out of corner and source image move in another place
+	destinationRectangle.X, sourceRectangle.X = 100, 50
+	destinationRectangle.Y, sourceRectangle.Y = 100, 50
 	destinationRectangle.W = sourceRectangle.W
 	destinationRectangle.H = sourceRectangle.H
 	//test to make picture smaller
