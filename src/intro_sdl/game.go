@@ -67,7 +67,9 @@ func InitGraph(title string, xpos int, ypos int, height int, width int, fullscre
 	destinationRectangle.Y, sourceRectangle.Y = 0, 0
 	destinationRectangle.W = sourceRectangle.W
 	destinationRectangle.H = sourceRectangle.H
-
+    //test to make picture smaller
+    sourceRectangle.W = 50
+    sourceRectangle.H = 50
 }
 
 func Render() {

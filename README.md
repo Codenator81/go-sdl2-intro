@@ -6,9 +6,10 @@ Just play with sdl2 on Golang
 <p>All assets u can get from official site of book</p>
 
 intro_sdl: 
-create assets in intro_sdl
+<p>create assets in intro_sdl</p>
+<p>create assets dir in your gopath</p>
+
 chapter1 - chapter2
-create assets dir in your gopath
 
 <br>
 
