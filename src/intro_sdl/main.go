@@ -1,27 +1,59 @@
 package main
 import (
+    "os"
+    "fmt"
+
     "github.com/veandco/go-sdl2/sdl"
 )
 
+var window *sdl.Window
+var renderer *sdl.Renderer
+var err error
+var event sdl.Event
+var gameRunning bool
+
 func main() {
-    sdl.Init(sdl.INIT_EVERYTHING)
-
-    window, err := sdl.CreateWindow("test", sdl.WINDOWPOS_UNDEFINED, sdl.WINDOWPOS_UNDEFINED,
-        800, 600, sdl.WINDOW_SHOWN)
-    if err != nil {
-        panic(err)
-    }
+    initGraph("Game SDL 2", sdl.WINDOWPOS_CENTERED, sdl.WINDOWPOS_CENTERED,
+    640, 480, sdl.WINDOW_SHOWN)
     defer window.Destroy()
-
-    surface, err := window.GetSurface()
-    if err != nil {
-        panic(err)
+    defer renderer.Destroy()
+    gameRunning = true
+    for gameRunning {
+        gameEvent()
+        render()
     }
-
-    rect := sdl.Rect{0, 0, 200, 200}
-    surface.FillRect(&rect, 0xffff0000)
-    window.UpdateSurface()
-
-    sdl.Delay(1000)
     sdl.Quit()
 }
+
+    func initGraph(title string, xpos int, ypos int, height int, width int, flags uint32) {
+        // initialize SDL
+        sdl.Init(sdl.INIT_EVERYTHING)
+        window, err := sdl.CreateWindow(title, xpos, ypos,
+        height, width, flags)
+        if err != nil {
+            fmt.Fprintf(os.Stderr, "Failed to create window: %s\n", err)
+            os.Exit(1)
+        }
+
+        renderer, err = sdl.CreateRenderer(window, -1, 0)
+        if err != nil {
+            fmt.Fprintf(os.Stderr, "Failed to create renderer: %s\n", err)
+            os.Exit(2)
+        }
+    }
+
+    func render() {
+        renderer.SetDrawColor(0, 0, 0, 255)
+        renderer.Present()
+        renderer.Clear()
+    }
+
+    func gameEvent() {
+        for event = sdl.PollEvent(); event != nil; event = sdl.PollEvent() {
+            switch event.(type) {
+                // sdl.QuitEvent quit on window close
+                case *sdl.QuitEvent:
+                    gameRunning = false
+            }
+        }
+    }
