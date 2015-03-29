@@ -3,19 +3,18 @@ Just play with sdl2 on Golang
 
 <p>This is work with book <a href="https://www.packtpub.com/game-development/sdl-game-development">SDL Game Development</a></p>
 <p>using Golang instead C++</p>
+<p>All assets u can get from official site of book</p>
 
-Install libraries for SDL2 on Linux:
+<h3>Install libraries for SDL2 on Linux:</h3>
 <ul>
 <li>sudo apt-get install libsdl2-dev</li>
 <li>sudo apt-get install libsdl2-image-dev</li>
-<ul>
-
-<p>All assets u can get from official site of book</p>
+</ul>
 
 intro_sdl: 
 <p>create assets in intro_sdl</p>
 
-chapter1 - chapter2
+chapter1 - chapter3
 
 <br>
 

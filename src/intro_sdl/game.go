@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 )
+
 var currentFrame int32
 var renderer *sdl.Renderer
 var zeroPoint *sdl.Point
@@ -45,8 +46,8 @@ func InitGraph(title string, xpos int, ypos int, height int, width int, fullscre
 
 func Render() {
 	renderer.Clear()
-	DrawFN("animate", 0,0, 128, 82)
-	DrawFrameFN("animate", 100,100, 128, 82, 1, currentFrame)
+	DrawFN("animate", 0, 0, 128, 82)
+	DrawFrameFN("animate", 100, 100, 128, 82, 1, currentFrame)
 	renderer.Present()
 }
 
