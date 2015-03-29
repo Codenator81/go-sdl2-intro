@@ -18,6 +18,7 @@ func main() {
 		game.HandleEvents()
 		game.Update()
 		game.Render(&tm)
+		sdl.Delay(10)
 	}
 	game.Clean()
 }
