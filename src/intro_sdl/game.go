@@ -42,7 +42,7 @@ func InitGraph(title string, xpos int, ypos int, height int, width int, fullscre
 		os.Exit(2)
 	}
 	var pTempSurface *sdl.Surface
-    //load animate sprite from book
+	//load animate sprite from book
 	pTempSurface, err = sdl.LoadBMP(AssetsPath() + "/animate.bmp")
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Failed to load BMP: %s\n", err)
@@ -56,10 +56,10 @@ func InitGraph(title string, xpos int, ypos int, height int, width int, fullscre
 	}
 
 	dstRect.X, srcRect.X = 0, 0
-    dstRect.Y, srcRect.Y = 0, 0
+	dstRect.Y, srcRect.Y = 0, 0
 	//get first picture in sprite
-    dstRect.W, srcRect.W = 128, 128
-    dstRect.H, srcRect.H = 82, 82
+	dstRect.W, srcRect.W = 128, 128
+	dstRect.H, srcRect.H = 82, 82
 }
 
 func Render() {
@@ -69,7 +69,10 @@ func Render() {
 	renderer.Present()
 }
 
-func Update() {}
+func Update() {
+	//move sprite for animation
+	srcRect.X = 128 * int32(((sdl.GetTicks() / 100) % 6))
+}
 
 func Clean() {
 	window.Destroy()
