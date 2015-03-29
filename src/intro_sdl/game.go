@@ -4,7 +4,12 @@ import (
 	"fmt"
 	"github.com/veandco/go-sdl2/sdl"
 	"os"
+	"path/filepath"
 )
+
+var pTexture *sdl.Texture
+var sourceRectangle sdl.Rect
+var destinationRectangle sdl.Rect
 
 func HandleEvents() {
 	for event = sdl.PollEvent(); event != nil; event = sdl.PollEvent() {
@@ -36,12 +41,43 @@ func InitGraph(title string, xpos int, ypos int, height int, width int, fullscre
 		fmt.Fprintf(os.Stderr, "Failed to create renderer: %s\n", err)
 		os.Exit(2)
 	}
+	var pTempSurface *sdl.Surface
+	filedirectory := filepath.Dir("assets/rider.bmp")
+	imagePath, _ := filepath.Abs(filedirectory)
+	fmt.Println(imagePath)
+	pTempSurface, err = sdl.LoadBMP("/home/alex/develop/go/game/assets/rider.bmp")
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Failed to load BMP: %s\n", err)
+		os.Exit(3)
+	}
+	defer pTempSurface.Free()
+	pTexture, err = renderer.CreateTextureFromSurface(pTempSurface)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Failed to create texture: %s\n", err)
+		os.Exit(4)
+	}
+	//count width and height of image
+	//Query return int but we need int32
+	var _, _, rWidth, rHeight, err = pTexture.Query()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Failed to query texture: %s\n", err)
+		os.Exit(5)
+	}
+	//convert(cast) int to int32
+	sourceRectangle.W, sourceRectangle.H = int32(rWidth), int32(rHeight)
+
+	destinationRectangle.X, sourceRectangle.X = 0, 0
+	destinationRectangle.Y, sourceRectangle.Y = 0, 0
+	destinationRectangle.W = sourceRectangle.W
+	destinationRectangle.H = sourceRectangle.H
+
 }
 
 func Render() {
 	renderer.SetDrawColor(0, 0, 0, 255)
-	renderer.Present()
 	renderer.Clear()
+	renderer.Copy(pTexture, &sourceRectangle, &destinationRectangle)
+	renderer.Present()
 }
 
 func Update() {}
@@ -49,5 +85,6 @@ func Update() {}
 func Clean() {
 	window.Destroy()
 	renderer.Destroy()
+	pTexture.Destroy()
 	sdl.Quit()
 }

@@ -33,7 +33,7 @@ _testmain.go
 game.iml
 
 # Assets
-assets/*
+assets/
 
 
 
