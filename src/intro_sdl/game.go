@@ -44,7 +44,7 @@ func InitGraph(title string, xpos int, ypos int, height int, width int, fullscre
 	}
 	var pTempSurface *sdl.Surface
 	//load animate sprite from book in PNG
-	pTempSurface, err = img.Load(AssetsPath() + "/animate.png")
+	pTempSurface, err = img.Load(AssetsPath() + "/animate-alpha.png")
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Failed to load BMP: %s\n", err)
 		os.Exit(3)
@@ -64,9 +64,10 @@ func InitGraph(title string, xpos int, ypos int, height int, width int, fullscre
 }
 
 func Render() {
+	renderer.SetDrawColor(255, 0, 0, 255)
 	renderer.Clear()
 	var zeroPoint *sdl.Point
-	renderer.CopyEx(pTexture, &srcRect, &dstRect, 0, zeroPoint, sdl.FLIP_HORIZONTAL)
+	renderer.CopyEx(pTexture, &srcRect, &dstRect, 0, zeroPoint, 0)
 	renderer.Present()
 }
 
