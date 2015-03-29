@@ -3,14 +3,12 @@ package main
 import (
 	"fmt"
 	"github.com/veandco/go-sdl2/sdl"
-	"github.com/veandco/go-sdl2/sdl_image"
 	"os"
 	"path/filepath"
 )
-
-var pTexture *sdl.Texture
-var srcRect sdl.Rect
-var dstRect sdl.Rect
+var currentFrame int32
+var renderer *sdl.Renderer
+var zeroPoint *sdl.Point
 
 func HandleEvents() {
 	for event = sdl.PollEvent(); event != nil; event = sdl.PollEvent() {
@@ -42,54 +40,34 @@ func InitGraph(title string, xpos int, ypos int, height int, width int, fullscre
 		fmt.Fprintf(os.Stderr, "Failed to create renderer: %s\n", err)
 		os.Exit(2)
 	}
-	var pTempSurface *sdl.Surface
-	//load animate sprite from book in PNG
-	pTempSurface, err = img.Load(AssetsPath() + "/animate-alpha.png")
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Failed to load BMP: %s\n", err)
-		os.Exit(3)
-	}
-	defer pTempSurface.Free()
-	pTexture, err = renderer.CreateTextureFromSurface(pTempSurface)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Failed to create texture: %s\n", err)
-		os.Exit(4)
-	}
-
-	dstRect.X, srcRect.X = 0, 0
-	dstRect.Y, srcRect.Y = 0, 0
-	//get first picture in sprite
-	dstRect.W, srcRect.W = 128, 128
-	dstRect.H, srcRect.H = 82, 82
+	Load(AssetsPath("animate-alpha.png"), "animate")
 }
 
 func Render() {
-	renderer.SetDrawColor(255, 0, 0, 255)
 	renderer.Clear()
-	var zeroPoint *sdl.Point
-	renderer.CopyEx(pTexture, &srcRect, &dstRect, 0, zeroPoint, 0)
+	DrawFN("animate", 0,0, 128, 82)
+	DrawFrameFN("animate", 100,100, 128, 82, 1, currentFrame)
 	renderer.Present()
 }
 
 func Update() {
 	//move sprite for animation
-	srcRect.X = 128 * int32(((sdl.GetTicks() / 100) % 6))
+	currentFrame = int32(((sdl.GetTicks() / 100) % 6))
 }
 
 func Clean() {
 	window.Destroy()
 	renderer.Destroy()
-	pTexture.Destroy()
 	sdl.Quit()
 }
 
 // get path to assets dir in current GOPATH
-func AssetsPath() string {
+func AssetsPath(filename string) string {
 	assetsdirectory := filepath.Dir("assets/")
 	imagePath, err := filepath.Abs(assetsdirectory)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Failed to find assets dir: %s\n", err)
 		os.Exit(6)
 	}
-	return imagePath
+	return imagePath + "/" + filename
 }

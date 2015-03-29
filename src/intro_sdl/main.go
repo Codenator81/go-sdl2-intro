@@ -5,7 +5,6 @@ import (
 )
 
 var window *sdl.Window
-var renderer *sdl.Renderer
 var err error
 var event sdl.Event
 var gameRunning bool
