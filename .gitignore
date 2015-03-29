@@ -11,7 +11,7 @@ _obj
 _test
 bin
 lib
-.idea/*
+.idea
 src/github.com
 
 # Architecture specific extensions/prefixes
@@ -31,6 +31,9 @@ _testmain.go
 *.prof
 
 game.iml
+
+# Assets
+assets/*
 
 
 
