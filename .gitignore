@@ -4,13 +4,14 @@
 *.o
 *.a
 *.so
+*.xml
 
 # Folders
 _obj
 _test
 bin
 lib
-.idea
+.idea/*
 src/github.com
 
 # Architecture specific extensions/prefixes
