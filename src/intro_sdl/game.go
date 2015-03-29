@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/veandco/go-sdl2/sdl"
+	"github.com/veandco/go-sdl2/sdl_image"
 	"os"
 	"path/filepath"
 )
@@ -42,8 +43,8 @@ func InitGraph(title string, xpos int, ypos int, height int, width int, fullscre
 		os.Exit(2)
 	}
 	var pTempSurface *sdl.Surface
-	//load animate sprite from book
-	pTempSurface, err = sdl.LoadBMP(AssetsPath() + "/animate.bmp")
+	//load animate sprite from book in PNG
+	pTempSurface, err = img.Load(AssetsPath() + "/animate.png")
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Failed to load BMP: %s\n", err)
 		os.Exit(3)
@@ -63,9 +64,9 @@ func InitGraph(title string, xpos int, ypos int, height int, width int, fullscre
 }
 
 func Render() {
-	renderer.SetDrawColor(0, 0, 0, 255)
 	renderer.Clear()
-	renderer.Copy(pTexture, &srcRect, &dstRect)
+	var zeroPoint *sdl.Point
+	renderer.CopyEx(pTexture, &srcRect, &dstRect, 0, zeroPoint, sdl.FLIP_HORIZONTAL)
 	renderer.Present()
 }
 
