@@ -27,7 +27,7 @@ func (gb *GameObj) Load(lo LoadOpt) {
 }
 
 func (gb *GameObj) Draw(g *Game, tm *TextureManager) {
-	tm.Draw(gb, g, sdl.FLIP_NONE)
+	tm.Draw(*gb, g, sdl.FLIP_NONE)
 }
 
 func (gb *GameObj) Update() {

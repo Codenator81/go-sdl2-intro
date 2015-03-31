@@ -15,6 +15,7 @@ type Game struct {
 	err          error
 	gb           *GameObj
 	player       *Player
+	enemy        *Enemy
 	gameObjs     []Gamer
 }
 
@@ -59,13 +60,17 @@ func (g *Game) InitGraph(title string, xpos int, ypos int, height int, width int
 	tm.Load(AssetsPath("animate-alpha.png"), "animate", g)
 	g.gb = &GameObj{}
 	g.player = &Player{}
+	g.enemy = &Enemy{}
 	loadGbOpt := LoadOpt{100, 100, 128, 82, "animate"}
 	loadPlrOpt := LoadOpt{300, 300, 128, 82, "animate"}
+	loadEnOpt := LoadOpt{0, 0, 128, 82, "animate"}
 	g.gb.Load(loadGbOpt)
 	g.player.Load(loadPlrOpt)
+	g.enemy.Load(loadEnOpt)
 	//add GameObj and Player to Interface
 	g.gameObjs = append(g.gameObjs, g.gb)
 	g.gameObjs = append(g.gameObjs, g.player)
+	g.gameObjs = append(g.gameObjs, g.enemy)
 }
 
 func (g *Game) Render(tm *TextureManager) {
