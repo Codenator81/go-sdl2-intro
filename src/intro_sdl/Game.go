@@ -18,6 +18,14 @@ type Game struct {
 	gameObjs     []Gamer
 }
 
+type LoadOpt struct {
+	x int32
+	y int32
+	width int32
+	height int32
+	textureID string
+}
+
 func (g *Game) HandleEvents() {
 	for g.event = sdl.PollEvent(); g.event != nil; g.event = sdl.PollEvent() {
 		switch g.event.(type) {
@@ -51,8 +59,10 @@ func (g *Game) InitGraph(title string, xpos int, ypos int, height int, width int
 	tm.Load(AssetsPath("animate-alpha.png"), "animate", g)
 	g.gb = &GameObj{}
 	g.player = &Player{}
-	g.gb.Load(100, 100, 128, 82, "animate")
-	g.player.Load(300, 300, 128, 82, "animate")
+	loadGbOpt := LoadOpt{100, 100, 128, 82, "animate"}
+	loadPlrOpt := LoadOpt{300, 300, 128, 82, "animate"}
+	g.gb.Load(loadGbOpt)
+	g.player.Load(loadPlrOpt)
 	//add GameObj and Player to Interface
 	g.gameObjs = append(g.gameObjs, g.gb)
 	g.gameObjs = append(g.gameObjs, g.player)

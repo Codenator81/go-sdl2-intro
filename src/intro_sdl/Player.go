@@ -10,5 +10,3 @@ type Player struct {
 func (p *Player) Update() {
 	p.x -= 1
 }
-
-func (p *Player) Clean() {}

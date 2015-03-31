@@ -31,38 +31,28 @@ func (tm *TextureManager) Load(fileName string, id string, g *Game) {
 	tm.textureMap[id] = pTexture
 }
 
-func (tm *TextureManager) Draw(id string, x int32, y int32, width int32, height int32, g *Game, flip sdl.RendererFlip) {
+func (tm *TextureManager) Draw(gb GameObj, g *Game, flip sdl.RendererFlip) {
 	var srcRect sdl.Rect
 	var destRect sdl.Rect
 
 	srcRect.X = 0
 	srcRect.Y = 0
-	srcRect.W, destRect.W = width, width
-	srcRect.H, destRect.H = height, height
-	destRect.X = x
-	destRect.Y = y
-	g.renderer.CopyEx(tm.textureMap[id], &srcRect, &destRect, 0, tm.zeroPoint, flip)
+	srcRect.W, destRect.W = gb.width, gb.width
+	srcRect.H, destRect.H = gb.height, gb.height
+	destRect.X = gb.x
+	destRect.Y = gb.y
+	g.renderer.CopyEx(tm.textureMap[gb.textureID], &srcRect, &destRect, 0, tm.zeroPoint, flip)
 }
 
-func (tm *TextureManager) DrawFrame(id string, x int32, y int32, width int32, height int32, currentRow int32, currentFrame int32, g *Game, flip sdl.RendererFlip) {
+func (tm *TextureManager) DrawFrame(gb GameObj, g *Game, flip sdl.RendererFlip) {
 	var srcRect sdl.Rect
 	var destRect sdl.Rect
-	srcRect.X = width * currentFrame
-	srcRect.Y = height * (currentRow - 1)
-	srcRect.W, destRect.W = width, width
-	srcRect.H, destRect.H = height, height
-	destRect.X = x
-	destRect.Y = y
+	srcRect.X = gb.width * gb.currentFrame
+	srcRect.Y = gb.height * (gb.currentRow - 1)
+	srcRect.W, destRect.W = gb.width, gb.width
+	srcRect.H, destRect.H = gb.height, gb.height
+	destRect.X = gb.x
+	destRect.Y = gb.y
 
-	g.renderer.CopyEx(tm.textureMap[id], &srcRect, &destRect, 0, tm.zeroPoint, flip)
-}
-
-//func for default flip_none
-func (tm *TextureManager) DrawFN(id string, x int32, y int32, width int32, height int32, g *Game) {
-	tm.Draw(id, x, y, width, height, g, sdl.FLIP_NONE)
-}
-
-//func for default flip_none
-func (tm *TextureManager) DrawFrameFN(id string, x int32, y int32, width int32, height int32, currentRow, currentFrame int32, g *Game) {
-	tm.DrawFrame(id, x, y, width, height, currentRow, currentFrame, g, sdl.FLIP_NONE)
+	g.renderer.CopyEx(tm.textureMap[gb.textureID], &srcRect, &destRect, 0, tm.zeroPoint, flip)
 }
