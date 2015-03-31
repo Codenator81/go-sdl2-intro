@@ -12,6 +12,7 @@ _test
 bin
 lib
 .idea
+.idea/workspace.xml
 src/github.com
 
 # Architecture specific extensions/prefixes
