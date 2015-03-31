@@ -13,8 +13,8 @@ type Game struct {
 	window       *sdl.Window
 	event        sdl.Event
 	err          error
-	gb           GameObj
-	player       Player
+	gb           *GameObj
+	player       *Player
 	gameObjs     []Gamer
 }
 
@@ -49,7 +49,8 @@ func (g *Game) InitGraph(title string, xpos int, ypos int, height int, width int
 		os.Exit(2)
 	}
 	tm.Load(AssetsPath("animate-alpha.png"), "animate", g)
-
+	g.gb = &GameObj{}
+	g.player = &Player{}
 	g.gb.Load(100, 100, 128, 82, "animate")
 	g.player.Load(300, 300, 128, 82, "animate")
 	//add GameObj and Player to Interface
