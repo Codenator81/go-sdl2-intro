@@ -13,8 +13,9 @@ type Game struct {
 	window       *sdl.Window
 	event        sdl.Event
 	err          error
-	gb           GameObject
+	gb           GameObj
 	player       Player
+	gameObjs     []Gamer
 }
 
 func (g *Game) HandleEvents() {
@@ -48,21 +49,28 @@ func (g *Game) InitGraph(title string, xpos int, ypos int, height int, width int
 		os.Exit(2)
 	}
 	tm.Load(AssetsPath("animate-alpha.png"), "animate", g)
+
 	g.gb.Load(100, 100, 128, 82, "animate")
 	g.player.Load(300, 300, 128, 82, "animate")
+	//add GameObj and Player to Interface
+	g.gameObjs = append(g.gameObjs, g.gb)
+	g.gameObjs = append(g.gameObjs, g.player)
 }
 
 func (g *Game) Render(tm *TextureManager) {
 	g.renderer.Clear()
-	g.gb.Draw(g, tm)
-	g.player.Draw(g, tm)
+	// loop through our objects and draw them
+	for n, _ := range g.gameObjs {
+		g.gameObjs[n].Draw(g, tm)
+	}
 	g.renderer.Present()
 }
 
 func (g *Game) Update() {
-	//move sprite for animation
-	g.gb.Update()
-	g.player.Update()
+	// loop through and update our objects
+	for n, _ := range g.gameObjs {
+		g.gameObjs[n].Update()
+	}
 }
 
 func (g *Game) Clean() {

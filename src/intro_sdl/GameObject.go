@@ -1,12 +1,11 @@
 package main
 
-import (
-	"fmt"
-)
+type Gamer interface {
+	Draw(g *Game, tm *TextureManager)
+	Update()
+}
 
-//start do OOP thinks ))
-
-type GameObject struct {
+type GameObj struct {
 	textureID    string
 	currentFrame int32
 	currentRow   int32
@@ -16,7 +15,7 @@ type GameObject struct {
 	height       int32
 }
 
-func (gb *GameObject) Load(x int32, y int32, width int32, height int32, textureID string) {
+func (gb *GameObj) Load(x int32, y int32, width int32, height int32, textureID string) {
 	gb.x = x
 	gb.y = y
 	gb.width = width
@@ -26,15 +25,12 @@ func (gb *GameObject) Load(x int32, y int32, width int32, height int32, textureI
 	gb.currentFrame = 1
 }
 
-//todo pRenderer *sdl.Renderer
-func (gb *GameObject) Draw(g *Game, tm *TextureManager) {
+func (gb *GameObj) Draw(g *Game, tm *TextureManager) {
 	tm.DrawFN(gb.textureID, gb.x, gb.y, gb.width, gb.height, g)
 }
 
-func (gb *GameObject) Update() {
+func (gb *GameObj) Update() {
 	gb.x += 1
 }
 
-func (gb *GameObject) Clean() {
-	fmt.Println("clean game object")
-}
+func (gb *GameObj) Clean() {}
