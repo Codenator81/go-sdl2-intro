@@ -7,12 +7,19 @@ type Gamer interface {
 }
 
 type GameObj struct {
-	LoaderParams
+	vec2d Vector2d
+	width int32
+	height int32
+	textureID string
 	currentFrame int32
 	currentRow   int32
 }
-func NewGameObj(x int32, y int32, width int32, height int32, textureID string) *GameObj{
-	return &GameObj{LoaderParams{x,y,width,height,textureID},1,1}
+func NewGameObj(x float64, y float64, width int32, height int32, textureID string) *GameObj{
+	v := Vector2d{}
+	//play with setters ))
+	v.SetX(x)
+	v.SetY(y)
+	return &GameObj{v,width,height,textureID,1,1}
 }
 
 func (gb *GameObj) Draw(g *Game, tm *TextureManager) {
@@ -20,5 +27,5 @@ func (gb *GameObj) Draw(g *Game, tm *TextureManager) {
 }
 
 func (gb *GameObj) Update() {
-	gb.x += 1
+	gb.vec2d.SetX(gb.vec2d.X() + 1)
 }

@@ -39,8 +39,8 @@ func (tm *TextureManager) Draw(gb GameObj, g *Game, flip sdl.RendererFlip) {
 	srcRect.Y = 0
 	srcRect.W, destRect.W = gb.width, gb.width
 	srcRect.H, destRect.H = gb.height, gb.height
-	destRect.X = gb.x
-	destRect.Y = gb.y
+	destRect.X = int32(gb.vec2d.X())
+	destRect.Y = int32(gb.vec2d.Y())
 	g.renderer.CopyEx(tm.textureMap[gb.textureID], &srcRect, &destRect, 0, tm.zeroPoint, flip)
 }
 
@@ -51,8 +51,8 @@ func (tm *TextureManager) DrawFrame(gb GameObj, g *Game, flip sdl.RendererFlip) 
 	srcRect.Y = gb.height * (gb.currentRow - 1)
 	srcRect.W, destRect.W = gb.width, gb.width
 	srcRect.H, destRect.H = gb.height, gb.height
-	destRect.X = gb.x
-	destRect.Y = gb.y
+	destRect.X = int32(gb.vec2d.X())
+	destRect.Y = int32(gb.vec2d.Y())
 
 	g.renderer.CopyEx(tm.textureMap[gb.textureID], &srcRect, &destRect, 0, tm.zeroPoint, flip)
 }
