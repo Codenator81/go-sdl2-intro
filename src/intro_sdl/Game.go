@@ -36,7 +36,6 @@ func (g *Game) InitGraph(title string, xpos int, ypos int, height int, width int
 		os.Exit(2)
 	}
 	tm.Load(AssetsPath("animate-alpha.png"), "animate", g)
-	g.gameObjs = append(g.gameObjs, NewGameObj(100, 100, 128, 82, "animate"))
 	g.gameObjs = append(g.gameObjs, NewPlayer(300, 300, 128, 82, "animate"))
 	g.gameObjs = append(g.gameObjs, NewEnemy(0, 0, 128, 82, "animate"))
 }
