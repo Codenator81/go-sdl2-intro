@@ -14,7 +14,7 @@ func main() {
 	var game Game
 	tm := TextureManager{textureMap: map[string]*sdl.Texture{}}
 	// before last parameter bool fullscreen
-	game.InitGraph("Game SDL 2", sdl.WINDOWPOS_CENTERED, sdl.WINDOWPOS_CENTERED,
+	game.InitGame("Game SDL 2", sdl.WINDOWPOS_CENTERED, sdl.WINDOWPOS_CENTERED,
 		640, 480, false, &tm)
 	game.gameRunning = true
 	//Game loop

@@ -14,9 +14,11 @@ type Game struct {
 	event        sdl.Event
 	err          error
 	gameObjs     []Gamer
+	//GameStateMachine
+	gsm GSM
 }
 
-func (g *Game) InitGraph(title string, xpos int, ypos int, height int, width int, fullscreen bool, tm *TextureManager) {
+func (g *Game) InitGame(title string, xpos int, ypos int, height int, width int, fullscreen bool, tm *TextureManager) {
 	// initialize SDL
 	sdl.Init(sdl.INIT_EVERYTHING)
 
@@ -38,6 +40,8 @@ func (g *Game) InitGraph(title string, xpos int, ypos int, height int, width int
 	tm.Load(AssetsPath("animate-alpha.png"), "animate", g)
 	g.gameObjs = append(g.gameObjs, NewPlayer(300, 300, 128, 82, "animate"))
 	g.gameObjs = append(g.gameObjs, NewEnemy(0, 0, 128, 82, "animate"))
+	//init game states
+	g.gsm.changeState(NewMenuState())
 }
 
 func (g *Game) Render(tm *TextureManager) {

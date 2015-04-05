@@ -14,7 +14,7 @@ Just play with sdl2 on Golang
 intro_sdl: 
 <p>create assets in intro_sdl</p>
 
-chapter1 - chapter3
+<p>In future make it as game engine library</p>
 
 <br>
 
