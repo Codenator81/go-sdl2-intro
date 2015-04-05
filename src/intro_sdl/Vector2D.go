@@ -43,3 +43,7 @@ func(v *Vector2d) Normalize() {
     }
 }
 
+func(v *Vector2d) ClearXY() {
+    v.x, v.y = 0, 0
+}
+
