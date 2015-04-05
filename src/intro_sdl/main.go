@@ -9,14 +9,13 @@ import (
 const FPS uint32 = 60
 const DELAY_TIME uint32 = uint32(1000.0 / FPS)
 func main() {
-	runtime.GOMAXPROCS(4)
+	runtime.GOMAXPROCS(1)
 	var frameStart, frameTime uint32
 	var game Game
 	tm := TextureManager{textureMap: map[string]*sdl.Texture{}}
 	// before last parameter bool fullscreen
 	game.InitGame("Game SDL 2", sdl.WINDOWPOS_CENTERED, sdl.WINDOWPOS_CENTERED,
 		640, 480, false, &tm)
-	fmt.Println(runtime.NumGoroutine())
 	//Game loop
 	for {
 		//fmt.Println(runtime.NumGoroutine())
