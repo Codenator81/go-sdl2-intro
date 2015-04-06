@@ -12,6 +12,7 @@ import (
 		window       *sdl.Window
 		err          error
 		gameObjs     []Gamer
+		in InputHandler
 		//GameStateMachine
 		gsm GSM
 	}
@@ -35,6 +36,7 @@ import (
 			os.Exit(2)
 		}
 		tm.Load(AssetsPath("animate-alpha.png"), "animate", g)
+		g.in.newIH()
 		g.gameObjs = append(g.gameObjs, NewPlayer(300, 300, 128, 82, "animate"))
 		g.gameObjs = append(g.gameObjs, NewEnemy(0, 0, 128, 82, "animate"))
 		//init game states
@@ -44,6 +46,7 @@ import (
 	func (g *Game) Render(tm *TextureManager) {
 		g.renderer.Clear()
 		// loop through our objects and draw them
+		g.gsm.Render()
 		for n, _ := range g.gameObjs {
 			g.gameObjs[n].Draw(g, tm)
 		}
@@ -55,12 +58,12 @@ import (
 		for n, _ := range g.gameObjs {
 			g.gameObjs[n].Update()
 		}
+		g.gsm.Update()
 	}
 
 	func (g *Game) HandleEvents() {
-		var in InputHandler
-		in.Update()
-		if in.isKeyDown(sdl.SCANCODE_RETURN) {
+		g.in.Update()
+		if IsKeyDown(sdl.SCANCODE_RETURN) {
 			g.gsm.changeState(NewPlayState())
 		}
 	}

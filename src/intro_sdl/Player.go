@@ -17,21 +17,30 @@ func NewPlayer(x float64, y float64, width int32, height int32, textureID string
 }
 
 func (p *Player) Update() {
-	var in InputHandler
-	if in.isKeyDown(sdl.SCANCODE_RIGHT) {
+	if IsKeyDown(sdl.SCANCODE_RIGHT) {
 		p.velocity.SetX(2)
 		p.GameObj.Update()
 	}
-	if in.isKeyDown(sdl.SCANCODE_LEFT) {
+	if IsKeyDown(sdl.SCANCODE_LEFT) {
 		p.velocity.SetX(-2)
 		p.GameObj.Update()
 	}
-	if in.isKeyDown(sdl.SCANCODE_UP) {
+	if IsKeyDown(sdl.SCANCODE_UP) {
 		p.velocity.SetY(-2)
 		p.GameObj.Update()
 	}
-	if in.isKeyDown(sdl.SCANCODE_DOWN) {
+	if IsKeyDown(sdl.SCANCODE_DOWN) {
 		p.velocity.SetY(2)
+		p.GameObj.Update()
+	}
+	//test mouse button left
+	if getMouseButtonState(M_B_LEFT) {
+		p.velocity.SetX(2)
+		p.GameObj.Update()
+	}
+	//test mouse button right
+	if getMouseButtonState(M_B_RIGHT) {
+		p.velocity.SetX(-2)
 		p.GameObj.Update()
 	}
 	p.velocity.ClearXY()
