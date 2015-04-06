@@ -33,14 +33,14 @@ func (p *Player) Update() {
 		p.velocity.SetY(2)
 		p.GameObj.Update()
 	}
-	//test mouse button left
+	// test player follow mouse when pressed left button
 	if getMouseButtonState(M_B_LEFT) {
-		p.velocity.SetX(2)
-		p.GameObj.Update()
-	}
-	//test mouse button right
-	if getMouseButtonState(M_B_RIGHT) {
-		p.velocity.SetX(-2)
+		var vec Vector2d
+		vec = getMousePosition()
+		vec.Subtr(p.position)
+		vec.Divide(30)
+		p.velocity.SetY(vec.Y())
+		p.velocity.SetX(vec.X())
 		p.GameObj.Update()
 	}
 	p.velocity.ClearXY()

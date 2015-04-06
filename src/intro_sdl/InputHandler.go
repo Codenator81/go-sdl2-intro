@@ -19,6 +19,8 @@ type InputHandler struct {
 var KeyStates []uint8
 // Mouse button States
 var MsBtnSts [3]bool
+// Mouse Position
+var msPst Vector2d
 
     func (in *InputHandler) newIH() {
         // make 3 buttons mouse false default
@@ -26,6 +28,8 @@ var MsBtnSts [3]bool
         for i,_ := range MsBtnSts{
             MsBtnSts[i] = false
         }
+        // default mouse position 0
+        msPst = Vector2d{0,0}
     }
 
     func (in *InputHandler) Update() {
@@ -36,18 +40,18 @@ var MsBtnSts [3]bool
                 case *sdl.QuitEvent:
                     Quit()
                 case *sdl.KeyDownEvent:
-                    in.onKeyDown()
+                    OnKeyDown()
                     fmt.Println(event)
                 case *sdl.KeyUpEvent:
-                    in.onKeyUp()
+                    OnKeyUp()
                 case *sdl.MouseMotionEvent:
-                    //in.onMMotion()
+                    OnMouseMove(t)
                 case *sdl.MouseButtonEvent:
                     if t.State == 1 {
-                        in.OnBMouseDown(t)
+                        OnBMouseDown(t)
                     }
                     if t.State == 0 {
-                        in.OnBMouseUp(t)
+                        OnBMouseUp(t)
                     }
             }
         }
@@ -68,15 +72,19 @@ var MsBtnSts [3]bool
         return MsBtnSts[btnNum]
     }
 
-    func (in *InputHandler) onKeyDown() {
+    func getMousePosition() Vector2d {
+        return msPst
+    }
+
+    func OnKeyDown() {
         KeyStates = sdl.GetKeyboardState()
     }
 
-    func (in *InputHandler) onKeyUp() {
+    func OnKeyUp() {
         KeyStates = nil
     }
 
-    func (in *InputHandler) OnBMouseDown(t *sdl.MouseButtonEvent) {
+    func OnBMouseDown(t *sdl.MouseButtonEvent) {
         switch t.Button {
             case M_E_LEFT:
                 MsBtnSts[M_B_LEFT] = true
@@ -86,7 +94,7 @@ var MsBtnSts [3]bool
                 MsBtnSts[M_B_RIGHT] = true
         }
     }
-    func (in *InputHandler) OnBMouseUp(t *sdl.MouseButtonEvent) {
+    func OnBMouseUp(t *sdl.MouseButtonEvent) {
         switch t.Button {
             case M_E_LEFT:
             MsBtnSts[M_B_LEFT] = false
@@ -96,5 +104,11 @@ var MsBtnSts [3]bool
             MsBtnSts[M_B_RIGHT] = false
         }
     }
+
+    func OnMouseMove(t *sdl.MouseMotionEvent) {
+        msPst.SetX(float64(t.X))
+        msPst.SetY(float64(t.Y))
+    }
+
 
 
